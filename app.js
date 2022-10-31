@@ -20,7 +20,7 @@ const getSuperHero = () => {
 
 // randomly generate superhero function
 const randomSuperHero = () => {
-  const totalSuperHero = 732;
+  const totalSuperHero = 731;
   return Math.floor(Math.random() * totalSuperHero + 1);
 };
 
