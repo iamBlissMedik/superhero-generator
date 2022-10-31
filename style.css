@@ -10,7 +10,16 @@ body{
     align-items: center;
 }
 
+.input{
+    margin-bottom: 20px;
+}
+
 .container{
     height: 500px;
     padding: 30px 30px;
+}
+
+#superhero-image{
+    width: 300px;
+    height: 300px;
 }
