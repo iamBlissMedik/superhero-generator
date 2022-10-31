@@ -14,8 +14,7 @@ const getSuperHero = () => {
   fetch(`${superHeroAPI}/${randomSuperHero()}`)
     .then((response) => response.json())
     .then((json) => {
-      heroName.textContent = `${json.name}`;
-      superHeroImage.src = `${json.image.url}`;
+     superheroDetails(json)
     });
 };
 
@@ -31,10 +30,17 @@ const inputValue = document.querySelector("#input-value").value;
   fetch(`${superHeroAPI}/search/${inputValue}`)
     .then((response) => response.json())
       .then((json) => {
-          superHeroImage.src = `${json.results[0].image.url}`;
-          heroName.textContent = `${json.results[0].name}`;
+          const theHero = json.results[0]
+          superheroDetails(theHero);
       
     });
 };
+
+const superheroDetails = (superhero) => {
+    let superheroName = superhero.name
+    let searchSuperHeroImgUrl = superhero.image.url;
+     heroName.textContent = `${superheroName}`;
+     superHeroImage.src = `${searchSuperHeroImgUrl}`;
+}
 
 loadAllEventListeners();
