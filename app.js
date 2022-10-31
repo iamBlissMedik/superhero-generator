@@ -3,8 +3,8 @@ const inputValue = document.querySelector("#input-value");
 const randomGen = document.querySelector("#random-gen");
 const superHeroAPI = "https://www.superheroapi.com/api.php/5742301652531542";
 const loadAllEventListeners = () => {
-    randomGen.addEventListener("click", getSuperHero);
-}
+  randomGen.addEventListener("click", getSuperHero);
+};
 
 // generate button
 const getSuperHero = () => {
@@ -13,15 +13,12 @@ const getSuperHero = () => {
     .then((json) => {
       heroName.textContent = `${json.name}`;
     });
-   
-    
-  
 };
 
 // randomly generate superhero
 const randomSuperHero = () => {
-  return Math.floor(Math.random() * 732 + 1);
+  const totalSuperHero = 732;
+  return Math.floor(Math.random() * totalSuperHero + 1);
 };
 
-loadAllEventListeners()
-
+loadAllEventListeners();
