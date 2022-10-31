@@ -1,5 +1,5 @@
 const heroName = document.querySelector(".name");
-
+const superHeroDetails = document.querySelector(".super-hero-details");
 const randomGen = document.querySelector("#random-gen");
 const superHeroImage = document.querySelector("#superhero-image");
 const search = document.querySelector("#search");
@@ -41,17 +41,18 @@ const superheroDetails = (superhero) => {
   let superheroName = superhero.name;
   let searchSuperHeroImgUrl = superhero.image.url;
   const powerStats = document.querySelector(".power-stats");
-
-  heroName.textContent = `${superheroName}`;
-  superHeroImage.src = `${searchSuperHeroImgUrl}`;
+let imageHTML = `<img id ="superhero-image" src=${searchSuperHeroImgUrl}>`;
+ let heroNameHTML = `<h2 class="name">${superheroName}</h2>`;
+  
 
   let stats = Object.keys(superhero.powerstats)
-    .map((ability) => {
+      .map((ability) => {
+        
       return `<p>${ability} : ${superhero.powerstats[ability]}</p>`;
     })
     .join(" ");
 
-  powerStats.innerHTML = stats;
+  superHeroDetails.innerHTML = `${imageHTML} ${heroNameHTML} ${stats}`
 };
 
 loadAllEventListeners();
