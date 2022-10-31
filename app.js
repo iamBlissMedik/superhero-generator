@@ -40,15 +40,15 @@ const searchSuperHero = () => {
 const superheroDetails = (superhero) => {
   let superheroName = superhero.name;
   let searchSuperHeroImgUrl = superhero.image.url;
-  const powerStats = document.querySelector(".power-stats");
+  
 let imageHTML = `<img id ="superhero-image" src=${searchSuperHeroImgUrl}>`;
- let heroNameHTML = `<h2 class="name">${superheroName}</h2>`;
+ let heroNameHTML = `<h2 class="name">${superheroName.toUpperCase()}</h2>`;
   
 
   let stats = Object.keys(superhero.powerstats)
       .map((ability) => {
         
-      return `<p>${ability} : ${superhero.powerstats[ability]}</p>`;
+      return `<p>${ability.toUpperCase()} : ${superhero.powerstats[ability]}</p>`;
     })
     .join(" ");
 
