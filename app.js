@@ -4,18 +4,42 @@ const randomGen = document.querySelector("#random-gen");
 const superHeroImage = document.querySelector("#superhero-image");
 const search = document.querySelector("#search");
 const superHeroAPI = "https://www.superheroapi.com/api.php/5742301652531542";
+const errorText = document.querySelector(".error");
 const loadAllEventListeners = () => {
   randomGen.addEventListener("click", getSuperHero);
   search.addEventListener("click", searchSuperHero);
 };
 
+// error
+const renderError = (msg) => {
+  errorText.style.display = "block";
+  errorText.textContent = msg
+}
+
+
 // auto generate button
 const getSuperHero = () => {
   fetch(`${superHeroAPI}/${randomSuperHero()}`)
-    .then((response) => response.json())
+    .then((response) =>
+    {
+      console.log(response.ok);
+      return response.json()})
     .then((json) => {
+      
       superheroDetails(json);
+      
+      errorText.style.display = "none";
+      
+    })
+    .catch((err) =>
+    {
+     
+      let html
+        = "Something went wrong: Check your internet connection"
+     return renderError(`${html} `)
     });
+   
+  
 };
 
 // randomly generate superhero function
@@ -24,16 +48,38 @@ const randomSuperHero = () => {
   return Math.floor(Math.random() * totalSuperHero + 1);
 };
 
+
+
 // search for superhero
 const searchSuperHero = () => {
-  const inputValue = document.querySelector("#input-value").value;
+  let inputValue = document.querySelector("#input-value").value;
+  
   fetch(`${superHeroAPI}/search/${inputValue}`)
-    .then((response) => response.json())
+    .then((response) => {
+      
+      
+     return response.json()
+    })
     .then((json) => {
+     
+      if (json.error === "bad name search request") {
+        throw new Error("Not Found");
+      }
+      if (json.error === "character with given name not found") {
+        throw new Error(`"${inputValue}" Not Found`);
+      }
       const theHero = json.results[0];
+      errorText.style.display = "none";
 
       superheroDetails(theHero);
-    });
+    })
+    .catch(err => {
+      let html = "Something went wrong:";
+      
+      
+     return renderError(`${html}  ${err.message.toUpperCase()}`);
+   
+  })
 };
 
 // superhero full details and appending it to the dom

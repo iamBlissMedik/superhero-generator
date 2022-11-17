@@ -8,6 +8,7 @@ body{
     height: 100vh;
     justify-content: center;
     align-items: center;
+    
 }
 
 .input{
@@ -17,6 +18,7 @@ body{
 .container{
     height: 500px;
     padding: 30px 30px;
+   
 }
 
 #superhero-image{
@@ -25,6 +27,7 @@ body{
 }
 h1{
     margin-bottom: 20px;
+    
 }
 
 h2{
@@ -33,4 +36,12 @@ h2{
 
 button{
     text-transform: uppercase;
+}
+
+.error{
+    color: red;
+    font-size: 17px;
+    font-weight: bold;
+    text-transform: capitalize;
+    
 }
