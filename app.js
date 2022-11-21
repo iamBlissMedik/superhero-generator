@@ -17,6 +17,35 @@ const renderError = (msg) => {
 }
 
 
+
+// search for superhero
+const searchSuperHero = async () => {
+  try {
+     let inputValue = document.querySelector("#input-value").value;
+  
+  const search = await fetch(`${superHeroAPI}/search/${inputValue}`)
+    const searchData = await search.json();
+    console.error(searchData)
+    if (searchData.error === "bad name search request") {
+       
+        throw new Error("Not Found");
+      }
+      if (searchData.error === "character with given name not found") {
+        throw new Error(`"${inputValue}" Not Found`);
+      }
+      const theHero = searchData.results[0];
+      errorText.style.display = "none";
+
+      superheroDetails(theHero);
+   
+  }
+  catch (err) {
+    let html = "Something went wrong:";
+    return renderError(`${html}  ${err.message.toUpperCase()}`);
+  }
+ 
+};
+
 // auto generate button
 const getSuperHero = () => {
   fetch(`${superHeroAPI}/${randomSuperHero()}`)
@@ -50,37 +79,7 @@ const randomSuperHero = () => {
 
 
 
-// search for superhero
-const searchSuperHero = () => {
-  let inputValue = document.querySelector("#input-value").value;
-  
-  fetch(`${superHeroAPI}/search/${inputValue}`)
-    .then((response) => {
-      
-      
-     return response.json()
-    })
-    .then((json) => {
-     
-      if (json.error === "bad name search request") {
-        throw new Error("Not Found");
-      }
-      if (json.error === "character with given name not found") {
-        throw new Error(`"${inputValue}" Not Found`);
-      }
-      const theHero = json.results[0];
-      errorText.style.display = "none";
 
-      superheroDetails(theHero);
-    })
-    .catch(err => {
-      let html = "Something went wrong:";
-      
-      
-     return renderError(`${html}  ${err.message.toUpperCase()}`);
-   
-  })
-};
 
 // superhero full details and appending it to the dom
 const superheroDetails = (superhero) => {
